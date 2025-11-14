@@ -3,6 +3,7 @@
 
 Este proyecto es un conjunto de pruebas unitarias en C# para un ejemplo de manejo de Personas, Facturas y Productos, usando xUnit como framework de test. Está diseñado como demostración de cómo crear y ejecutar pruebas unitarias en PowerShell sobre un proyecto .NET.
 
+> Nota: Este proyecto de pruebas es independiente y **no está acoplado al proyecto principal Magnetron_PT**, por lo que no requiere conexión a base de datos ni dependencias externas. Esto permite ejecutar las pruebas de manera aislada para evaluar la lógica de las clases y sus relaciones.
 ---
 
 
@@ -26,29 +27,28 @@ PruebasUnitariasAPI/
 
 ---
 ### Clases y pruebas incluidas
-- Persona
-  Clase Persona con propiedades como Per_ID, Per_Nombre, Per_Apellido, Per_TipoDocumento y Per_Documento.
+- **Persona**  
+  Clase con propiedades: `Per_ID`, `Per_Nombre`, `Per_Apellido`, `Per_TipoDocumento`, `Per_Documento`.  
   Pruebas verifican:
-  Que exista una persona específica por ID.
-  Que no se obtenga una persona inexistente.
-  Conteo de personas.
-- Producto
-  Clase Producto con Prod_ID, Prod_Descripcion, Prod_Precio, Prod_Costo y Prod_UM.
+  - Existencia de una persona específica por ID.
+  - No obtención de personas inexistentes.
+  - Conteo correcto de personas.
+- **Producto**  
+  Clase con propiedades: `Prod_ID`, `Prod_Descripcion`, `Prod_Precio`, `Prod_Costo`, `Prod_UM`.  
   Pruebas verifican:
-  Que el precio sea mayor que el costo.
-  Que se pueda buscar un producto en una lista por ID.
--FactxPersona
-  Clase FactxPersona representa la factura principal.
-  Contiene FEnc_ID, FEnc_Numero, FEnc_Fecha y zPer_ID (relación con Persona).
-  Pruebas verifican que la factura esté relacionada con una persona válida.
-  Verifica que cada factura tenga una persona asociada válida.
+  - Que el precio sea mayor que el costo.
+  - Que se pueda buscar un producto por ID en una lista.
 
-- FactxProducto
-  Clase Fact_Detalle para los detalles de la factura.
-  Contiene FDet_ID, FDet_Linea, FDet_Cantidad y zProd_ID (relación con Producto).
+- **FactxPersona**  
+  Clase `FactxPersona` representa la factura principal con `FEnc_ID`, `FEnc_Numero`, `FEnc_Fecha` y `zPer_ID` (relación con Persona).  
   Pruebas verifican:
-  Que el detalle tenga un producto válido.
-  Que el total calculado (cantidad × precio) sea correcto.
+  - Que la factura tenga una persona asociada válida.
+
+- **FactxProducto**  
+  Clase `Fact_Detalle` representa los detalles de la factura con `FDet_ID`, `FDet_Linea`, `FDet_Cantidad` y `zProd_ID` (relación con Producto).  
+  Pruebas verifican:
+  - Que el detalle tenga un producto válido.
+  - Que el total calculado (cantidad × precio) sea correcto.
 
 ##  Tablas simuladas
 
@@ -68,20 +68,24 @@ PruebasUnitariasAPI/
 - xUnit (ya incluido en el proyecto via NuGet)
 
 ---
-## Dependencias y limitaciones
+## Patrones de diseño aplicados
 
-Estas pruebas son independientes y no están integradas al proyecto principal de facturación.
-Funcionan como un sandbox de ejemplo, mostrando cómo crear y ejecutar pruebas unitarias en .NET con xUnit.
-La ejecución está pensada para PowerShell, debido a la configuración del entorno .NET y la ruta de trabajo del proyecto.
-No requieren base de datos ni referencias externas, todo se simula con listas en memoria.
+Este proyecto, aunque sencillo, demuestra algunos patrones de diseño:
+
+- **Factory / Creación de objetos:** Las listas de prueba (`List<Persona>`, `List<Producto>`) simulan la creación centralizada de objetos para tests.  
+- **Repository (simulado):** Las listas en memoria funcionan como un repositorio de datos, separando la lógica de negocio de la fuente de datos.  
+- **Builder (sugerido):** Para objetos con muchas propiedades (Persona, Producto), se podría usar un Builder para simplificar la creación de instancias en los tests.
+
+---
 
 ## Cómo ejecutar las pruebas
 
-Importante: Estas pruebas se ejecutan en PowerShell usando .NET.
-Abrir PowerShell y navegar a la carpeta del proyecto:
+> Importante: Estas pruebas se ejecutan **solo en PowerShell** usando .NET.
+
+1. Abrir PowerShell y navegar a la carpeta del proyecto:
+```powershell
 cd "C:\..\..\Magnetron\PruebasUnitariasAPI\PruebasUnitariasAPI"
-
-
+```
 Restaurar dependencias y compilar:
 ```
 dotnet build
@@ -91,7 +95,9 @@ Ejecutar todas las pruebas:
 ```
 dotnet test
 ```
+
 Al final verás un resumen con el total de pruebas, cuántas pasaron y si hubo errores.
+
 ## Objetivo
 
 El propósito de este es demostrar el flujo de pruebas unitarias en .NET, simulando un pequeño sistema de facturación. Cada clase y prueba muestra buenas prácticas de:
