@@ -44,7 +44,7 @@ PruebasUnitariasAPI/
 
 ---
 
-## ⚙️ Requisitos
+## Requisitos
 
 - [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - Visual Studio 2022 / VS Code (opcional)
