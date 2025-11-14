@@ -6,7 +6,7 @@ Este proyecto sirve como referencia para aprender a estructurar pruebas unitaria
 
 ---
 
-## 📂 Estructura de carpetas
+##  Estructura de carpetas
 PruebasUnitariasAPI/
 
 │
@@ -33,7 +33,7 @@ PruebasUnitariasAPI/
 
 ---
 
-## 📝 Clases y Tablas simuladas
+## Clases y Tablas simuladas
 
 | Clase / Tabla       | Campos principales                                       |
 |--------------------|----------------------------------------------------------|
@@ -52,7 +52,7 @@ PruebasUnitariasAPI/
 
 ---
 
-## 💻 Comandos principales
+## Comandos principales
 
 ### Restaurar dependencias
 ```bash
@@ -100,7 +100,8 @@ Subir tu rama: git push origin mi-rama
 
 Abrir un Pull Request en este repositorio.
 
-### Licencia
-
-Este proyecto está bajo la MIT License
-.
+## AUTORA
+### Kelly P. Diaz Granados N.
+### Desarrolladora .NET | Apasionada por arquitectura limpia, optimización y buenas prácticas DevOps
+- Correo: lainusk@gmail.com
+- GitHub: lainusk
